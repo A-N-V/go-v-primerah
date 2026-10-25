@@ -131,6 +131,22 @@
 .block .seg:only-child .code { border-radius: var(--radius-xl); }
 .empty-code pre { padding: 0 !important; }
 .copy-slot { position: absolute; top: 8px; right: 8px; }
+/* Связка «пояснение ↔ фрагмент кода»: полоска слева у каждого пояснения,
+   активная пара (под курсором или в центре экрана) подсвечивается целиком */
+@media (min-width: 768px) {
+  .seg .doc { position: relative; padding-left: 16px; transition: color .15s; }
+  .seg .doc::before {
+    content: ""; position: absolute; left: 0; top: 12px; bottom: 8px; width: 2px;
+    border-radius: 2px; background: var(--border); transition: background .15s;
+  }
+  .seg.nodoc .doc::before { display: none; }
+  .seg .code { transition: background .15s, box-shadow .15s; }
+  .seg.is-active .doc::before { background: var(--primary); }
+  .seg.is-active .code:not(.empty-code) {
+    background: color-mix(in oklch, var(--primary) 10%, var(--code));
+    box-shadow: inset 3px 0 0 var(--primary);
+  }
+}
 .tok-kw { color: var(--kw); font-weight: 600; }
 .tok-str { color: var(--str); }
 .tok-num { color: var(--num); }
@@ -148,4 +164,18 @@
   .seg .code pre { padding: 12px 14px; font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: anywhere; }
   .nowrap .seg .code pre { white-space: pre; overflow-wrap: normal; }
   .copy-slot { top: 6px; right: 6px; }
+
+  /* Режим «пояснения в панели»: код сплошным листом, текущий фрагмент подсвечен */
+  .guide .seg .doc { display: none; }
+  .guide .block .seg .code { border-radius: 0 !important; transition: background .15s, box-shadow .15s; }
+  .guide .block .seg:first-child .code { border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important; }
+  .guide .block .seg:last-child .code { border-radius: 0 0 var(--radius-xl) var(--radius-xl) !important; }
+  .guide .block .seg:only-child .code { border-radius: var(--radius-xl) !important; }
+  .guide .seg .code pre { padding-block: 8px; }
+  .guide .seg .empty-code { min-height: 14px; }
+  .guide .seg.is-active .code:not(.empty-code) {
+    background: color-mix(in oklch, var(--primary) 12%, var(--code));
+    box-shadow: inset 3px 0 0 var(--primary);
+  }
+  .guide .block { margin-bottom: 20px; }
 }

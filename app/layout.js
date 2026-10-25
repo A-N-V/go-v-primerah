@@ -28,20 +28,15 @@ export default function RootLayout({ children }) {
     <html
       lang="ru"
       className={`${unbounded.variable} ${golos.variable} ${mono.variable}`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
-      <body className="min-h-dvh">
+      {/* suppressHydrationWarning: расширения (ColorZilla, Grammarly и т.п.) дописывают атрибуты в <body> */}
+      <body className="min-h-dvh" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
             <SiteHeader />
             <main className="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12">{children}</main>
-            <footer className="mx-auto max-w-6xl border-t px-4 py-8 text-sm text-muted-foreground sm:px-6">
-              Русская адаптация по мотивам{" "}
-              <a className="text-primary underline underline-offset-3" href="https://gobyexample.com">
-                Go by Example
-              </a>{" "}
-              Марка Макгранахана и Илая Бендерски. Тексты пояснений написаны заново.
-            </footer>
           </TooltipProvider>
         </ThemeProvider>
       </body>

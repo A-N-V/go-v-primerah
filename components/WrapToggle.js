@@ -26,7 +26,7 @@ export default function WrapToggle() {
     <Button
       variant={on ? "secondary" : "outline"}
       size="sm"
-      className="ml-auto md:hidden"
+      className="md:hidden"
       aria-pressed={on}
       onClick={toggle}
     >

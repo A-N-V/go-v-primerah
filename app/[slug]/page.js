@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import ExampleTools from "@/components/ExampleTools";
 import WrapToggle from "@/components/WrapToggle";
+import DocsModeToggle from "@/components/DocsModeToggle";
+import SegmentGuide from "@/components/SegmentGuide";
 
 export const dynamicParams = false;
 
@@ -60,12 +62,16 @@ export default async function ExamplePage({ params }) {
             {ex.n} из {examples.length}
           </Badge>
           {ex.en !== ex.title && <span className="text-sm text-muted-foreground">{ex.en}</span>}
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2 md:hidden">
+          <DocsModeToggle />
           <WrapToggle />
         </div>
       </header>
 
-      <div className="prose-ex" dangerouslySetInnerHTML={{ __html: ex.srcHtml + ex.restHtml }} />
+      <div id="ex-body" className="prose-ex" dangerouslySetInnerHTML={{ __html: ex.srcHtml + ex.restHtml }} />
       <ExampleTools slug={ex.slug} code={ex.code} prev={prev.href} next={next.href} />
+      <SegmentGuide slug={ex.slug} />
 
       <nav className="mt-4 grid grid-cols-2 gap-3" aria-label="Соседние примеры">
         <PagerLink {...prev} dir="prev" />

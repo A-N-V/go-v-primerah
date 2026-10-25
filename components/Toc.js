@@ -21,8 +21,9 @@ export default function Toc({ groups }) {
 
   const query = q.trim().toLowerCase();
   const filtered = groups
-    .map((g) => ({
+    .map((g, k) => ({
       ...g,
+      stage: roman(k + 1),
       items: g.items.filter((e) => !query || `${e.title} ${e.en} ${e.slug}`.toLowerCase().includes(query)),
     }))
     .filter((g) => g.items.length);
@@ -32,9 +33,10 @@ export default function Toc({ groups }) {
   return (
     <>
       <div className="mb-8 flex flex-col gap-3 sm:flex-row">
-        <Button asChild size="lg" className="h-11 px-4 text-[0.95rem]">
+        <Button asChild size="lg" className="h-11 max-w-full min-w-0 px-4 text-[0.95rem] sm:max-w-md">
           <Link href={`/${start.slug}`}>
-            {last ? "Продолжить:" : "Начать с"} <b className="font-semibold">{start.title}</b>
+            <span className="shrink-0">{last ? "Продолжить:" : "Начать с"}</span>
+            <b className="min-w-0 truncate font-semibold">{start.title}</b>
             <ArrowRightIcon data-icon="inline-end" />
           </Link>
         </Button>
@@ -55,9 +57,9 @@ export default function Toc({ groups }) {
         {filtered.map((g) => (
           <Card key={g.name} size="sm" className="gap-2">
             <CardHeader className="border-b">
-              <CardTitle className="flex items-center justify-between font-sans text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+              <CardTitle className="flex items-baseline gap-2.5 font-sans text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                <span className="min-w-7 font-heading text-sm tracking-normal text-primary">{g.stage}</span>
                 {g.name}
-                <span className="font-mono tracking-normal">{g.items.length}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="px-1.5">
@@ -84,4 +86,9 @@ export default function Toc({ groups }) {
       {!filtered.length && <p className="text-muted-foreground">Ничего не нашлось. Попробуйте другое слово.</p>}
     </>
   );
+}
+
+// Номер этапа римскими цифрами (групп немного, хватает до 39)
+function roman(n) {
+  return "X".repeat(Math.floor(n / 10)) + ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][n % 10];
 }
