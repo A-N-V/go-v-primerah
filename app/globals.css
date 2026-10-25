@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--f-golos), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: var(--f-unbounded), var(--f-golos), system-ui, sans-serif;
+  --font-mono: var(--f-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Палитра: тёплая «бумага» и бирюзовый акцент Go */
+:root {
+  --background: #fbfbf8;
+  --foreground: #1d2326;
+  --card: #ffffff;
+  --card-foreground: #1d2326;
+  --popover: #ffffff;
+  --popover-foreground: #1d2326;
+  --primary: #00798c;
+  --primary-foreground: #ffffff;
+  --secondary: #d5ecef;
+  --secondary-foreground: #0d3b42;
+  --muted: #eef3f1;
+  --muted-foreground: #5d6a70;
+  --accent: #e3f1f2;
+  --accent-foreground: #0d3b42;
+  --destructive: #c0392b;
+  --border: #e2e5e1;
+  --input: #dde2de;
+  --ring: #00798c;
+  --radius: 0.625rem;
+
+  --code: #eef3f1;
+  --code-foreground: #1f2b2e;
+  --kw: #8a3a8f;
+  --str: #2f7a2d;
+  --num: #b25a00;
+  --com: #7c8a86;
+  --typ: #00798c;
+}
+
+.dark {
+  --background: #101517;
+  --foreground: #e3e8e6;
+  --card: #151c1e;
+  --card-foreground: #e3e8e6;
+  --popover: #172022;
+  --popover-foreground: #e3e8e6;
+  --primary: #4cc3d4;
+  --primary-foreground: #06262b;
+  --secondary: #163a40;
+  --secondary-foreground: #d5f3f7;
+  --muted: #1a2224;
+  --muted-foreground: #93a19e;
+  --accent: #1b3236;
+  --accent-foreground: #e3f6f8;
+  --destructive: #f07167;
+  --border: #253033;
+  --input: #2c383b;
+  --ring: #4cc3d4;
+
+  --code: #172022;
+  --code-foreground: #dfe7e4;
+  --kw: #d79ce0;
+  --str: #9ad88a;
+  --num: #f0a95c;
+  --com: #74837f;
+  --typ: #6fd3e0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+/* Содержимое примеров приходит готовым HTML из content/examples.json */
+.prose-ex code {
+  @apply rounded-sm bg-muted px-1 py-0.5 font-mono text-[0.86em];
+}
+.prose-ex a { @apply text-primary underline underline-offset-3; }
+.seg { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.seg .doc { padding: 10px 28px 10px 0; min-width: 0; }
+.seg .doc p { margin: 0 0 8px; max-width: 46ch; line-height: 1.65; }
+.seg .code { background: var(--code); min-width: 0; overflow-x: auto; position: relative; }
+.seg .code pre {
+  margin: 0; padding: 10px 18px; font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.6;
+  color: var(--code-foreground); tab-size: 4;
+}
+.block { margin-bottom: 32px; border-radius: var(--radius-xl); }
+.block .seg:first-child .code { border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding-top: 8px; }
+.block .seg:last-child .code { border-radius: 0 0 var(--radius-xl) var(--radius-xl); padding-bottom: 8px; }
+.block .seg:only-child .code { border-radius: var(--radius-xl); }
+.empty-code pre { padding: 0 !important; }
+.copy-slot { position: absolute; top: 8px; right: 8px; }
+.tok-kw { color: var(--kw); font-weight: 600; }
+.tok-str { color: var(--str); }
+.tok-num { color: var(--num); }
+.tok-com { color: var(--com); font-style: italic; }
+.tok-typ { color: var(--typ); }
+.tok-pr { color: var(--primary); user-select: none; font-weight: 600; }
+.tok-out { color: var(--muted-foreground); }
+
+@media (max-width: 767px) {
+  .seg { grid-template-columns: minmax(0, 1fr); }
+  .seg .doc { padding: 16px 0 8px; }
+  .seg .doc p { max-width: none; }
+  .seg.nodoc .doc { display: none; }
+  .block .seg .code { border-radius: var(--radius-xl) !important; }
+  .seg .code pre { padding: 12px 14px; font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .nowrap .seg .code pre { white-space: pre; overflow-wrap: normal; }
+  .copy-slot { top: 6px; right: 6px; }
+}
