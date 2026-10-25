@@ -1,8 +1,8 @@
 # Go в примерах
 
-Next.js-версия учебника `go-v-primerah.html`: оглавление на главной и отдельная статическая страница для каждого из 85 примеров (`/hello-world`, `/goroutines`, …).
+Учебник по Go на русском: 85 коротких программ с пояснениями. Для каждого примера генерируется отдельная статическая страница (`/hello-world`, `/goroutines`, …).
 
-Стек: Next.js 16, Tailwind CSS 4, [shadcn/ui](https://ui.shadcn.com) (компоненты лежат в `components/ui`, добавлять новые — `npx shadcn@latest add <имя>`), next-themes для светлой/тёмной темы.
+Стек: Next.js 16, Tailwind CSS 4, [shadcn/ui](https://ui.shadcn.com) (компоненты в `components/ui`, новые добавляются через `npx shadcn@latest add <имя>`), next-themes для светлой и тёмной темы.
 
 ## Запуск
 
@@ -14,17 +14,10 @@ npm run build    # production-сборка
 
 ## Контент
 
-Тексты и подсвеченный код лежат в `content/examples.json`. Файл собирается из `go-v-primerah.html`:
+Тексты пояснений и подсвеченный код лежат в `content/examples.json`. Чтобы поправить пример, отредактируйте его там.
 
-```bash
-npm run extract
-```
+## Деплой
 
-Чтобы поправить пример, отредактируйте HTML и перезапустите `extract` (или правьте JSON напрямую).
+Импортируйте репозиторий на [vercel.com/new](https://vercel.com/new), настройки по умолчанию подходят. После этого каждый `git push` в `main` обновляет сайт.
 
-## Деплой на Vercel
-
-1. Залейте эту папку в отдельный репозиторий на GitHub.
-2. На vercel.com: **Add New → Project**, выберите репозиторий. Фреймворк Next.js определится сам, настройки менять не нужно.
-
-Или без GitHub: `npx vercel` в этой папке.
+Материал основан на [Go by Example](https://gobyexample.com) Марка Макгранахана и Илая Бендерски (CC BY 3.0).

@@ -1,6 +1,5 @@
 import { Unbounded, Golos_Text, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
@@ -34,10 +33,8 @@ export default function RootLayout({ children }) {
       {/* suppressHydrationWarning: расширения (ColorZilla, Grammarly и т.п.) дописывают атрибуты в <body> */}
       <body className="min-h-dvh" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <TooltipProvider>
-            <SiteHeader />
-            <main className="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12">{children}</main>
-          </TooltipProvider>
+          <SiteHeader />
+          <main className="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12">{children}</main>
         </ThemeProvider>
       </body>
     </html>
